@@ -16,27 +16,33 @@
  *
  */
 
-
 /**
  * @author Vitaliy Fedoriv
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {SpecialtyListComponent} from './specialty-list/specialty-list.component';
-import {SpecialtyEditComponent} from './specialty-edit/specialty-edit.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { SpecialtyListComponent } from "./specialty-list/specialty-list.component";
+import { SpecialtyEditComponent } from "./specialty-edit/specialty-edit.component";
+import { AuthGuard } from "app/core/auth/auth.guard";
 
 const specialtyRoutes: Routes = [
-  {path: 'specialties', component: SpecialtyListComponent},
+  {
+    path: "specialties",
+    component: SpecialtyListComponent,
+    canActivate: [AuthGuard]
+  },
   // {path: 'specialties/add', component: SpecialtyAddComponent},
   // {path: 'specialties/:id', component: SpecialtyDetailComponent},
-   {path: 'specialties/:id/edit', component: SpecialtyEditComponent}
+  {
+    path: "specialties/:id/edit",
+    component: SpecialtyEditComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(specialtyRoutes)],
   exports: [RouterModule]
 })
-
-export class SpecialtiesRoutingModule {
-}
+export class SpecialtiesRoutingModule {}

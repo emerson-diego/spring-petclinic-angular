@@ -20,27 +20,29 @@
  * @author Vitaliy Fedoriv
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {VisitListComponent} from './visit-list/visit-list.component';
-import {VisitEditComponent} from './visit-edit/visit-edit.component';
-import {VisitAddComponent} from './visit-add/visit-add.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { VisitListComponent } from "./visit-list/visit-list.component";
+import { VisitEditComponent } from "./visit-edit/visit-edit.component";
+import { VisitAddComponent } from "./visit-add/visit-add.component";
+import { AuthGuard } from "app/core/auth/auth.guard";
 
 const visitRoutes: Routes = [
-  {path: 'visits', component: VisitListComponent},
-  {path: 'visits/add', component: VisitAddComponent},
-  {path: 'visits/:id/edit', component: VisitEditComponent}
-
+  { path: "visits", component: VisitListComponent, canActivate: [AuthGuard] },
+  {
+    path: "visits/add",
+    component: VisitAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "visits/:id/edit",
+    component: VisitEditComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
-
 @NgModule({
-  imports: [
-    RouterModule.forChild(visitRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(visitRoutes)],
+  exports: [RouterModule]
 })
-export class VisitsRoutingModule {
-}
+export class VisitsRoutingModule {}

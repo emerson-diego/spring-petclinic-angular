@@ -24,5 +24,10 @@
 export const environment = {
   production: false,
   //REST_API_URL: 'http://localhost:9966/petclinic/api/'
-  REST_API_URL: "http://localhost:9966/api/"
+  REST_API_URL: "http://localhost:9966/api/",
+
+  apiHost: "http://localhost:9966",
+  //apiHost: 'http://appsrv-teste:8080',
+  redmineHost: "https://redminehomologacao.trt13.jus.br",
+  title: "Portal Estratégico da SETIC (HOMOLOGAÇÃO)"
 };

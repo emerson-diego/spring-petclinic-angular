@@ -26,21 +26,22 @@ import {NgModule} from '@angular/core';
 import {VisitAddComponent} from '../visits/visit-add/visit-add.component';
 import {PetEditComponent} from './pet-edit/pet-edit.component';
 import {PetAddComponent} from './pet-add/pet-add.component';
+import { AuthGuard } from 'app/core/auth/auth.guard';
 
 
 const petRoutes: Routes = [
-  {path: 'pets', component: PetListComponent},
-  {path: 'pets/add', component: PetAddComponent},
+  {path: 'pets', component: PetListComponent, canActivate: [AuthGuard]},
+  {path: 'pets/add', component: PetAddComponent, canActivate: [AuthGuard]},
   {
     path: 'pets/:id',
     children: [
       {
         path: 'edit',
-        component: PetEditComponent
+        component: PetEditComponent, canActivate: [AuthGuard]
       },
       {
         path: 'visits\/add',
-        component: VisitAddComponent
+        component: VisitAddComponent, canActivate: [AuthGuard]
       }
     ]
   }

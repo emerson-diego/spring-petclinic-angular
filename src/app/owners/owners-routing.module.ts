@@ -20,26 +20,41 @@
  * @author Vitaliy Fedoriv
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {OwnerDetailComponent} from './owner-detail/owner-detail.component';
-import {OwnerListComponent} from './owner-list/owner-list.component';
-import {OwnerEditComponent} from './owner-edit/owner-edit.component';
-import {OwnerAddComponent} from './owner-add/owner-add.component';
-import {PetAddComponent} from '../pets/pet-add/pet-add.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { OwnerDetailComponent } from "./owner-detail/owner-detail.component";
+import { OwnerListComponent } from "./owner-list/owner-list.component";
+import { OwnerEditComponent } from "./owner-edit/owner-edit.component";
+import { OwnerAddComponent } from "./owner-add/owner-add.component";
+import { PetAddComponent } from "../pets/pet-add/pet-add.component";
+import { AuthGuard } from "app/core/auth/auth.guard";
 
 const ownerRoutes: Routes = [
-  {path: 'owners', component: OwnerListComponent},
-  {path: 'owners/add', component: OwnerAddComponent},
-  {path: 'owners/:id', component: OwnerDetailComponent},
-  {path: 'owners/:id/edit', component: OwnerEditComponent},
-  {path: 'owners/:id/pets/add', component: PetAddComponent}
+  { path: "owners", component: OwnerListComponent, canActivate: [AuthGuard] },
+  {
+    path: "owners/add",
+    component: OwnerAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "owners/:id",
+    component: OwnerDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "owners/:id/edit",
+    component: OwnerEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "owners/:id/pets/add",
+    component: PetAddComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(ownerRoutes)],
   exports: [RouterModule]
 })
-
-export class OwnersRoutingModule {
-}
+export class OwnersRoutingModule {}

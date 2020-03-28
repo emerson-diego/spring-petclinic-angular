@@ -20,13 +20,21 @@
  * @author Vitaliy Fedoriv
  */
 
-import {Component} from '@angular/core';
+import { Component } from "@angular/core";
+import { UserService } from "./core/user/user.service";
+import { Usuario } from "./core/user/usuario";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  user: Usuario;
 
+  constructor(private userSerice: UserService) {}
+
+  ngOnInit() {
+    this.userSerice.getUser().subscribe(user => (this.user = user));
+  }
 }

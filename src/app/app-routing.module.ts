@@ -20,21 +20,22 @@
  * @author Vitaliy Fedoriv
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {PageNotFoundComponent} from './parts/page-not-found/page-not-found.component';
-import {WelcomeComponent} from './parts/welcome/welcome.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { PageNotFoundComponent } from "./parts/page-not-found/page-not-found.component";
+import { WelcomeComponent } from "./parts/welcome/welcome.component";
+import { SigninComponent } from "./home/signin.component";
+import { AuthGuard } from "./core/auth/auth.guard";
 
 const appRoutes: Routes = [
-  {path: 'welcome', component: WelcomeComponent},
-  {path: '', component: WelcomeComponent},
-  {path: '**', component: PageNotFoundComponent}
+  { path: "welcome", component: WelcomeComponent },
+  { path: "", component: SigninComponent },
+  { path: "login", component: SigninComponent },
+  { path: "**", component: PageNotFoundComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
