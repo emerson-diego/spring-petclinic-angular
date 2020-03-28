@@ -5,9 +5,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { UserService } from "../user/user.service";
 
-import { Config } from "../session/config";
 import { environment } from "environments/environment";
-import { ConfigService } from "../session/config.service";
 
 const apiURL = `${environment.apiHost}/auth`;
 
@@ -15,11 +13,7 @@ const apiURL = `${environment.apiHost}/auth`;
   providedIn: "root"
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-    private configService: ConfigService,
-    private userService: UserService
-  ) {}
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   authenticate(userName: string, password: string): Observable<any> {
     return this.http

@@ -4,7 +4,7 @@ import * as jtw_decode from "jwt-decode";
 import { TokenService } from "../token/token.service";
 
 import { UserToken } from "./userToken";
-import { ConfigService } from "../session/config.service";
+
 import { HomeService } from "../session/home.service";
 import { Usuario } from "./usuario";
 
@@ -19,7 +19,6 @@ export class UserService {
 
   constructor(
     private tokenService: TokenService,
-    private configService: ConfigService,
     private homeService: HomeService
   ) {
     this.tokenService.hasToken() && this.decodeAndNotify();
@@ -52,7 +51,6 @@ export class UserService {
 
   logout() {
     this.tokenService.removeToken();
-    this.configService.removeConfig();
     this.homeService.removeConfig();
     this.userSubject.next(null);
   }
