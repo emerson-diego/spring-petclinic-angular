@@ -39,12 +39,17 @@ export class UserService {
 
     if (userToken) {
       const user: Usuario = {
-        email: userToken.sub
+        email: userToken.sub,
+        nome: userToken.nome,
+        admin: userToken.admin,
+        usuario: userToken.usuario
+
         //login: userToken.sub,
         //eAdmin: userToken.papel[0] == Papel.ADMIN,
         //eGestor: userToken.papel[0] == Papel.GESTOR,
         //setor: userToken.setor ? userToken.setor[0] : null
       };
+      console.log("aqui teste" + user);
       this.userSubject.next(user);
     }
   }

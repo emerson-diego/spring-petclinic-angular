@@ -3,4 +3,7 @@ export interface UserToken {
   papel: string[];
   setor?: string[];
   exp: number;
+  nome: string;
+  admin: boolean;
+  usuario: boolean;
 }
