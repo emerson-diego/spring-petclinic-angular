@@ -16,25 +16,24 @@
  *
  */
 
-
 /**
  * @author Vitaliy Fedoriv
  */
 
-import {Component, Input, OnInit} from '@angular/core';
-import {Pet} from '../pet';
-import {PetService} from '../pet.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Owner} from '../../owners/owner';
-import {PetType} from '../../pettypes/pettype';
-import {PetTypeService} from '../../pettypes/pettype.service';
+import { Component, Input, OnInit } from "@angular/core";
+import { Pet } from "../pet";
+import { PetService } from "../pet.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Owner } from "../../owners/owner";
+import { PetType } from "../../pettypes/pettype";
+import { PetTypeService } from "../../pettypes/pettype.service";
 
-import * as moment from 'moment';
+import * as moment from "moment";
 
 @Component({
-  selector: 'app-pet-edit',
-  templateUrl: './pet-edit.component.html',
-  styleUrls: ['./pet-edit.component.css']
+  selector: "app-pet-edit",
+  templateUrl: "./pet-edit.component.html",
+  styleUrls: ["./pet-edit.component.css"],
 })
 export class PetEditComponent implements OnInit {
   pet: Pet;
@@ -43,8 +42,12 @@ export class PetEditComponent implements OnInit {
   petTypes: PetType[];
   errorMessage: string;
 
-  constructor(private petService: PetService, private petTypeService: PetTypeService, private router: Router,
-              private route: ActivatedRoute) {
+  constructor(
+    private petService: PetService,
+    private petTypeService: PetTypeService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.pet = {} as Pet;
     this.currentOwner = {} as Owner;
     this.currentType = {} as PetType;
@@ -52,36 +55,35 @@ export class PetEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.petTypeService.getPetTypes().subscribe(
-      pettypes => this.petTypes = pettypes,
-      error => this.errorMessage = error as any);
+      (pettypes) => (this.petTypes = pettypes),
+      (error) => (this.errorMessage = error as any)
+    );
 
     const petId = this.route.snapshot.params.id;
     this.petService.getPetById(petId).subscribe(
-      pet => {
+      (pet) => {
         this.pet = pet;
         this.currentOwner = this.pet.owner;
         this.currentType = this.pet.type;
       },
-      error => this.errorMessage = error as any);
-
+      (error) => (this.errorMessage = error as any)
+    );
   }
 
   onSubmit(pet: Pet) {
     pet.type = this.currentType;
     const that = this;
     // format output from datepicker to short string yyyy/mm/dd format
-    pet.birthDate = moment(pet.birthDate).format('YYYY/MM/DD');
+    pet.birthDate = moment(pet.birthDate).format("DD/MM/YYYY");
 
     this.petService.updatePet(pet.id.toString(), pet).subscribe(
-      res => this.gotoOwnerDetail(this.currentOwner),
-      error => this.errorMessage = error as any
+      (res) => this.gotoOwnerDetail(this.currentOwner),
+      (error) => (this.errorMessage = error as any)
     );
   }
 
   gotoOwnerDetail(owner: Owner) {
-    this.router.navigate(['/owners', owner.id]);
+    this.router.navigate(["/owners", owner.id]);
   }
-
 }

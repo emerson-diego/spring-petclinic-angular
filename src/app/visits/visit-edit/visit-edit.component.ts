@@ -74,7 +74,7 @@ export class VisitEditComponent implements OnInit {
     visit.pet = this.currentPet;
 
     // format output from datepicker to short string yyyy/mm/dd format
-    visit.date = moment(visit.date).format("YYYY/MM/DD");
+    visit.date = moment(visit.date).format("DD/MM/YYYY");
 
     this.visitService.updateVisit(visit.id.toString(), visit).subscribe(
       (res) => this.gotoOwnerDetail(),

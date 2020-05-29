@@ -21,40 +21,83 @@
     <h2>
       Add Pet
     </h2>
-    <form class="form-horizontal" (ngSubmit)="onSubmit(petForm.value)" #petForm="ngForm">
+    <form
+      class="form-horizontal"
+      (ngSubmit)="onSubmit(petForm.value)"
+      #petForm="ngForm"
+    >
       <div class="form-group" hidden="true">
-        <input type="text" hidden="true" class="form-control" id="id" [(ngModel)]="pet.id" name="id"/>
-        <input type="text" hidden="true" class="form-control" id="owner" [(ngModel)]="pet.owner" name="owner"/>
+        <input
+          type="text"
+          hidden="true"
+          class="form-control"
+          id="id"
+          [(ngModel)]="pet.id"
+          name="id"
+        />
+        <input
+          type="text"
+          hidden="true"
+          class="form-control"
+          id="owner"
+          [(ngModel)]="pet.owner"
+          name="owner"
+        />
       </div>
       <div class="form-group">
         <label for="owner" class="col-sm-2 control-label">Owner</label>
         <div class="col-sm-10">
-          <input id="owner_name" name="owner_name" class="form-control" type="text"
-                 value="{{ currentOwner.firstName }} {{ currentOwner.lastName }}" readonly/>
+          <input
+            id="owner_name"
+            name="owner_name"
+            class="form-control"
+            type="text"
+            value="{{ currentOwner.firstName }} {{ currentOwner.lastName }}"
+            readonly
+          />
         </div>
       </div>
-      <br/>
-      <div class="form-group ">
+      <br />
+      <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-          <input id="name" name="name" class="form-control" type="text" [(ngModel)]="pet.name"/>
+          <input
+            id="name"
+            name="name"
+            class="form-control"
+            type="text"
+            [(ngModel)]="pet.name"
+          />
         </div>
       </div>
-      <div class="form-group ">
+      <div class="form-group">
         <label class="col-sm-2 control-label">Birth Date</label>
         <div class="col-sm-10">
-          <input matInput [matDatepicker]="birthDateDatepicker" [ngModel]="pet.birthDate | date:'yyyy-MM-dd'" name="birthDate">
-          <mat-datepicker-toggle matSuffix [for]="birthDateDatepicker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="birthDateDatepicker"
+            [ngModel]="pet.birthDate | date: 'dd/MM/yyyy'"
+            name="birthDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="birthDateDatepicker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #birthDateDatepicker></mat-datepicker>
         </div>
       </div>
       <div class="control-group">
-        <div class="form-group ">
+        <div class="form-group">
           <label for="type" class="col-sm-2 control-label">Type </label>
           <div class="col-sm-10">
-            <select id="type" name="type" class="form-control" [(ngModel)]="pet.type">
-              <option *ngFor="let type of petTypes"
-                      [ngValue]="type">{{ type.name }}
+            <select
+              id="type"
+              name="type"
+              class="form-control"
+              [(ngModel)]="pet.type"
+            >
+              <option *ngFor="let type of petTypes" [ngValue]="type"
+                >{{ type.name }}
               </option>
             </select>
           </div>
@@ -62,8 +105,14 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <br/>
-          <button class="btn btn-default" type="button" (click)="gotoOwnerDetail()">< Back</button>
+          <br />
+          <button
+            class="btn btn-default"
+            type="button"
+            (click)="gotoOwnerDetail()"
+          >
+            < Back
+          </button>
           <button class="btn btn-default" type="submit">Save Pet</button>
         </div>
       </div>
